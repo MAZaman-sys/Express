@@ -1,0 +1,31 @@
+const mongoose = require('mongoose');
+
+// Define the schema for the Product model
+const productSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,  // Ensures that 'title' is a required field
+        trim: true       // Removes extra spaces before and after the title
+    },
+    price: {
+        type: Number,
+        required: true,  // Ensures that 'price' is a required field
+        min: [0, 'Price must be a positive number']  // Ensures that the price is a non-negative number
+    },
+    category: {
+        type: String,
+        required: true,  // Ensures that 'category' is a required field
+        trim: true       // Removes extra spaces before and after the category
+    },
+    inStock: {
+        type: Boolean,
+        required: true,  // Ensures that 'inStock' is a required field
+        default: true    // Sets the default value to true if not provided
+    }
+});
+
+// Create a model based on the schema
+const Product = mongoose.model('Product', productSchema);
+
+// Export the model
+module.exports = Product;
